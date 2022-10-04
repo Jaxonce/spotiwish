@@ -1,0 +1,86 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <BaseOutputPath>..\..\bin</BaseOutputPath>
+    <PackageIcon>SpotiWishLogo64px.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icones\button_add.png" />
+    <None Remove="icones\button_bin.png" />
+    <None Remove="icones\button_next.png" />
+    <None Remove="icones\button_pause.png" />
+    <None Remove="icones\button_play.png" />
+    <None Remove="icones\button_previous.png" />
+    <None Remove="icones\button_upload.png" />
+    <None Remove="icones\coeur_plein.png" />
+    <None Remove="icones\coeur_vide.png" />
+    <None Remove="icones\Heart.png" />
+    <None Remove="icones\heart_icon_empty.png" />
+    <None Remove="icones\heart_icon_fill.png" />
+    <None Remove="icones\music_logo.png" />
+    <None Remove="icones\pen_empty.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icones\button_add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icones\button_bin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icones\button_next.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icones\button_pause.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icones\button_play.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icones\button_previous.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icones\heart_icon_empty.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icones\heart_icon_fill.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icones\pen_empty.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="icones\button_upload.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="icones\coeur_plein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icones\coeur_vide.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="icones\music_logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="icones\Heart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Document\doxygen\images\SpotiWishLogo64px.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassOfSpotiWish\Modele.csproj" />
+    <ProjectReference Include="..\Persistance\Persistance.csproj" />
+    <ProjectReference Include="..\StubLib\StubLib.csproj" />
+  </ItemGroup>
+
+</Project>

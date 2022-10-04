@@ -1,0 +1,126 @@
+﻿<Window x:Class="Projet1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projet1"
+        mc:Ignorable="d"
+        MinHeight="450" MinWidth="800"
+        Background="Transparent"
+        Loaded="Window_Loaded">
+
+    <!-- Border avec un background, utilisé par l'Application-->
+    <Border Background="{StaticResource backgroundColor}">
+        <DockPanel>
+            <!-- Menu des trois Bouton en Haut à gauche (Ajouter, Supprimer, Favoris) -->
+            <DockPanel Width="Auto" Height="30" DockPanel.Dock="Top" HorizontalAlignment="Left">
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Click="Button_Add" Style="{StaticResource toolBox}" Grid.Column="0">
+                        <Image Source="icones/button_add.png"></Image>
+                    </Button>
+                    <ToggleButton x:Name="ButtonBin" Click="Button_Bin" IsChecked="False" Style="{StaticResource toolBoxToggle}" Grid.Column="1">
+                        <Image Source="icones/button_bin.png"></Image>
+                    </ToggleButton>
+                    <Button Click="Button_DisplayFavoris" Style="{StaticResource toolBox}" Grid.Column="2">
+                        <Image x:Name="Button_Fav" Source="icones/coeur_vide.png"></Image>
+                    </Button>
+                </Grid>
+            </DockPanel>
+            <!-- Boutons Valider et Supprimer visible seulement lorsque le Master est en mode Supression-->
+            <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Valide_supp" Click="Button_Valide_Supp" Style="{StaticResource toolBox}" Height="30" Visibility="Collapsed">
+                    <TextBlock>Valider</TextBlock>
+                </Button>
+                <Button Grid.Column="1" x:Name="Annule_supp" Click="Button_Annul_Supp" Style="{StaticResource toolBox}" Visibility="Collapsed">
+                    <TextBlock>Annuler</TextBlock>
+                </Button>
+            </Grid>
+            <!-- ListBox contenant toutes les informations du Master-->
+            <ListBox x:Name="MasterTitres"
+                DockPanel.Dock="Left" 
+                Width="300" 
+                HorizontalContentAlignment="Stretch" 
+                Background="Transparent" 
+                BorderThickness="0"  
+                ItemsSource="{Binding ListeTitre}"
+                ItemTemplate="{DynamicResource currentTitreTemplate}"
+                SelectedItem="{Binding SelectedTitre}">
+                <ListBox.Resources>
+                    <Style TargetType="{x:Type ScrollBar}">
+                        <Setter Property="Background" Value="{StaticResource backgroundColor}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource elementColor}"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                </ListBox.Resources>
+            </ListBox>
+            <!-- Nom de l'Application en haut, en Vert-Bleu -->
+            <TextBlock Text="SpotiWish" Margin="5" DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="48" Foreground="{StaticResource titleColor}"/>
+            <!-- Details Contenant la Vidéo, l'Image, les boutons Play/Pause, next, previous et les informations sur le Titre-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300*"/>
+                    <RowDefinition MaxHeight="600" Height="43*"/>
+                    <RowDefinition Height="33*"/>
+                    <RowDefinition Height="74*"/>
+                </Grid.RowDefinitions>
+                <!-- Vidéo-->
+                <MediaElement x:Name="Video" Grid.Column="0"  Grid.Row="0" Source="{Binding SelectedTitre.LienVideo.Lien, Converter={StaticResource string2VideoConverter}}" Margin="20,0,0,0" LoadedBehavior="Manual" UnloadedBehavior="Play"/>
+                <!-- Boutons Play/Pause, Next et Previous-->
+                <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,1,0,0" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Click="Button_Click_Previous" Style="{StaticResource toolBox}" Grid.Column="0" MaxHeight="70">
+                        <Image Source="icones/button_previous.png"></Image>
+                    </Button>
+                    <Button   Click="Button_Click_Play"  Style="{StaticResource toolBox}" Grid.Column="1" MaxHeight="70">
+                        <Image x:Name="Button_Play_Pause" Source="icones/button_play.png"></Image>
+                    </Button>
+                    <Button Click="Button_Next_Music_Click" Style="{StaticResource toolBox}" Grid.Column="2" MaxHeight="70">
+                        <Image Source="icones/button_next.png"></Image>
+                    </Button>
+                </Grid>
+                <!-- Image du Titre-->
+                <Image Source="{Binding SelectedTitre.CheminImage.Chemin, Converter={StaticResource string2ImageConverter}}" MinWidth="60" MaxWidth="250" Grid.Column="1" Grid.Row="0" Margin="0,35,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <!-- Informations sur le Titre-->
+                <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Style="{StaticResource textList}" Text="Titre : " Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="5"/>
+                    <TextBlock Style="{StaticResource textList}" Text="{Binding SelectedTitre.Nom, FallbackValue=Aurelie}" Grid.Row="0" Grid.Column="1" />
+                    <TextBlock Style="{StaticResource textList}" Text="Auteur : " Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="5" />
+                    <TextBlock Style="{StaticResource textList}" Text="{Binding SelectedTitre.NomArtiste.Nom, FallbackValue=Colonel}" Grid.Row="1" Grid.Column="1" />
+                    <TextBlock Style="{StaticResource textList}" Text="Lien : " Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5" />
+                    <TextBlock Style="{StaticResource textList}" Text="{Binding SelectedTitre.LienVideo.Lien, FallbackValue=liendelamusique}" Grid.Row="2" Grid.Column="1" />
+                    <TextBlock Style="{StaticResource textList}" Text="Bio : " Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="5" />
+                    <TextBlock Style="{StaticResource textList}" Text="{Binding SelectedTitre.Bio, FallbackValue=biographie}" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap"/>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Border>
+</Window>
+
+<!-- Dock panel a l'interieur de la listBox pour mettre les boutons en haut + Grid de 3 boutons -->
