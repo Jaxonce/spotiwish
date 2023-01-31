@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <BaseOutputPath>..\..\bin</BaseOutputPath>
     <PackageIcon>SpotiWishLogo64px.png</PackageIcon>
@@ -78,9 +78,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassOfSpotiWish\Modele.csproj" />
-    <ProjectReference Include="..\Persistance\Persistance.csproj" />
-    <ProjectReference Include="..\StubLib\StubLib.csproj" />
+    <ProjectReference Include="..\ClassOfSpotiWish\Modele.csproj">
+      <ReferenceSourceTarget></ReferenceSourceTarget>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistance\Persistance.csproj">
+      <ReferenceSourceTarget></ReferenceSourceTarget>
+    </ProjectReference>
+    <ProjectReference Include="..\StubLib\StubLib.csproj">
+      <ReferenceSourceTarget></ReferenceSourceTarget>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>
